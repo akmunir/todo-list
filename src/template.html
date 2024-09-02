@@ -20,7 +20,7 @@
         <main>
             <h1 class="main-text">Today <br> <span class="num-tasks">1 task</span></h1>
             <ul class="task-list">
-            <li class="task">Laundry</li>
+            <li class="task">Homework</li>
             </ul> 
         </main>
     </div>
@@ -29,21 +29,30 @@
             <form id ="task-form" action="www.google.com">
                 <input id ="title" type="text" name="title" placeholder="Task Name" required>
                 <input id="description" ="text" name="description" placeholder="Task Description">
-                <input id="date" type="date" name="dueDate" placeholder="Due Date">;
-                <p>Priority:</p>
-                <div>
-                    <label for"low">Low</label>
-                    <input type="radio" id="low" name="priority">
+                <input id="date" type="date" name="dueDate" placeholder="Due Today">
+                <div class="dropdown">
+                    <div class="dropbtn">Priority</div>
+                    <div id="myDropdown" class="dropdown-content">
+                        <div>
+                            <label for"low">Low</label>
+                            <input type="radio" id="low" name="priority">
+                        </div>
+                        <div>
+                            <label for"med">Medium</label>
+                            <input type="radio" id="med" name="priority">
+                        </div>
+                        <div>
+                            <label for"high">High</label>
+                            <input type="radio" id="high" name="priority">
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for"med">Medium</label>
-                    <input type="radio" id="med" name="priority">
+                <div class="task-creation-buttons">
+                    <button>Cancel</button>
+                    <input id="add-task" type="submit" value="Add Task">
                 </div>
-                <div>
-                    <label for"high">High</label>
-                    <input type="radio" id="high" name="priority">
-                </div>
-                <input type="submit" name="CreateTask">
+                
+                
             </form>
         </dialog>
     </div>
