@@ -1,4 +1,5 @@
 export const Task = class {
+    static taskCount = 1;
     constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
@@ -15,25 +16,26 @@ export const Task = class {
     }
 }
 
+
 export const createTask = () => {
     const titleInput = document.querySelector('form input[name="title"]');
     const descriptionInput = document.querySelector('form input[name="description"]');
     const dueDateInput = document.querySelector('form input[name="dueDate"]');
-    const priorityInput = document.querySelector('form input[type="radio"]:checked');
+    const priorityInput = document.querySelector('form .selected');
     
     const taskInfo = [
         titleInput.value.trim(),
         descriptionInput.value.trim(),
         dueDateInput.value,
-        priorityInput.value,
+        priorityInput.value.trim(),
     ];
     if (!taskInfo[0]) {
         return null;
     }
     titleInput.value = "";
     descriptionInput.value = "";
-    dueDateInput.value = "";
-
+    dueDateInput.classList.remove("selected");
+    Task.taskCount++;
     console.log(taskInfo);
     return new Task(...taskInfo);
 }

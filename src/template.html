@@ -25,7 +25,7 @@
         </main>
     </div>
     <div>
-        <dialog class="task-creation">
+        <dialog class="creation-modal">
             <form id ="task-form" action="www.google.com" autocomplete="off">
                 <input id ="title" type="text" name="title" placeholder="Task Name" required>
                 <input id="description" ="text" name="description" placeholder="Task Description">
@@ -34,19 +34,19 @@
                     <div class="dropbtn">Priority</div>
                     <div class="dropdown-content">
                         <div>
-                            <button type="button" id="low">Low</button>
+                            <input type="button" class="low" value="Low">
                         </div>
                         <div>
-                            <button type="button" id="med">Medium</button>
+                            <input type="button" class="med" value="Medium">
                         </div>
                         <div>
-                            <button type="button" id="high">High</button>
+                            <input type="button" class="high" value="High">
                         </div>
                     </div>
                 </div>
                 <div class="task-creation-buttons">
-                    <button>Cancel</button>
-                    <input id="add-task" type="submit" value="Add Task">
+                    <button id="cancel">Cancel</button>
+                    <input id="add" type="submit" value="Add Task">
                 </div>
             </form>
         </dialog>
