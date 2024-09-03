@@ -23,6 +23,7 @@ input {
 }
 
 #date {
+    width: 15%;
     color: #969696;
 }
 
@@ -110,4 +111,13 @@ input {
 }
 .high {
     color: rgb(153, 6, 6);
+}
+#cancel {
+    box-shadow: none;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 16px;
+}
+.cancel:hover {
+    cursor: pointer;
 }

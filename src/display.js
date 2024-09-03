@@ -4,6 +4,7 @@ export const displayTaskCreation = () => {
     const priorityDisplay = document.querySelector(".dropbtn");
     const prioritySelection = document.querySelector(".dropdown-content");
     const form = document.querySelector('form');
+    const cancelbtn = document.querySelector(".cancel")
     taskCreation.showModal();
     prioritySelection.addEventListener("click", (event) => {
         if (event.target.classList.contains("low")) {
@@ -17,6 +18,13 @@ export const displayTaskCreation = () => {
             priorityDisplay.innerText = "High";
         }
     })
+    cancelbtn.addEventListener("click", (event) => {
+        if (event.target.classList.contains("cancel")) {
+            taskCreation.close(); 
+            priorityDisplay.innerText = "Priority"  
+            form.reset();
+        } 
+    })
     form.addEventListener("submit", (event) => {
         console.log("display2");
         event.preventDefault();
@@ -28,14 +36,26 @@ export const displayTaskCreation = () => {
         taskCreation.close();
     });
 }
+
+
 export const updateTaskList = (task) => {
     const list = document.querySelector(".task-list");
-    const numTasks = document.querySelector(".num-tasks");
     const listElement = document.createElement("li");
+    const taskContainer = document.createElement("div");
+    const taskDueDate = document.createElement("span");
+    taskContainer.classList.add("task-container");
+    taskDueDate.classList.add("task-due-date");
+    taskDueDate.innerText = task.getDueDate();
     listElement.innerText = task.getTitle();
     listElement.classList.add("task");
-    list.appendChild(listElement);
-    console.log(Task.taskCount);
+    taskContainer.appendChild(listElement);
+    taskContainer.appendChild(taskDueDate);
+    list.appendChild(taskContainer);
+    updateTaskCount();
+}
+
+export const updateTaskCount = () => {
+    const numTasks = document.querySelector(".num-tasks"); 
     if (Task.taskCount === 0) {
         numTasks.innerText = "No tasks!";
     } else if (Task.taskCount === 0) {
@@ -43,5 +63,4 @@ export const updateTaskList = (task) => {
     } else {
         numTasks.innerText = `${Task.taskCount} tasks`
     }
-
 }

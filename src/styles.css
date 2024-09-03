@@ -1,6 +1,7 @@
 * {
     font-family: "Roboto";
 }
+
 .parent {
     height:100vw;
     display: flex;
@@ -69,4 +70,15 @@ aside {
     color: #9f9f9f;
     font-size: 1.1rem;
     margin-left: 1.2rem;
+}
+.task-container {
+    position: relative;
+}
+
+.task-due-date {
+    color:#b32424;
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    font-size: 0.8rem;
 }
