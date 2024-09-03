@@ -73,7 +73,7 @@ aside {
 
 .task-creation {
     min-width:50vw;
-    max-height: 50%;
+    min-height: 25vh;
     border-radius: 10px;
     border: none;
     box-shadow: 0px 0px 15px 0px rgba(49, 49, 48, 0.75);
@@ -115,36 +115,62 @@ input {
 }
 
 .dropbtn {
+    max-width: 5%;
     background-color: #3498DB;
     color: white;
-    padding: 16px;
+    padding: 10px 20px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+   
   }
   
 .dropdown {
+  
     position: relative;
     display: inline-block;
 }
 
-.dropdown-content {
+.dropdown .dropdown-content {
     display: none;
     position: absolute;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
 }
 
-.dropdown-content input {
+.dropdown-content button {
     color: black;
     padding: 12px 16px;
-    text-decoration: none;
+    display: block;
+    border: none;
+    box-shadow: none;
+}
+
+.dropdown:hover .dropdown-content {
+    background-color: #3498DB;
+    cursor: pointer;
     display: block;
 }
 
-.dropdown-content a:hover {
-    background-color: #ddd;
+.dropdown button {
+    width:100%;
+    background-color: #3498DB;
+    text-align: center;
+   
+}
+.dropdown button:hover {
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
     cursor: pointer;
 }
-.show {display:block;}
+.dropdown:hover .dropbtn {
+    background-color: #3b81b1;
+}
+
+#low {
+    color: rgb(40, 206, 40);
+}#med {
+    color: rgb(201, 142, 33);
+}
+#high {
+    color: rgb(153, 6, 6);
+}

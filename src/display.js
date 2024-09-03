@@ -2,7 +2,6 @@ import {createTask} from "./task.js"; //fix later so i dont need to importg into
 export const displayTaskCreation = () => {
     const taskCreation = document.querySelector(".task-creation");
     const form = document.querySelector('form');
-    const priority = document.querySelector("#myDropdown");
     taskCreation.showModal();
     form.addEventListener("submit", (event) => {
         console.log("display2");
@@ -13,11 +12,6 @@ export const displayTaskCreation = () => {
         }
         taskCreation.close();
     });
-    priority.addEventListener("click", (event) => {
-        if (event.target.classList.contains("dropbtn")) {
-            priority.classList.toggle("show");
-        }
-    })
 }
 export const updateTaskList = (task) => {
     const list = document.querySelector(".task-list");
