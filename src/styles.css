@@ -79,6 +79,7 @@ aside {
     color:#b32424;
     position: absolute;
     bottom: 0;
+    top: 70%;
     left: 10%;
     font-size: 0.8rem;
 }
