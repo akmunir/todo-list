@@ -1,6 +1,6 @@
 // webpack.config.js
-import webpack from 'webpack'
-import { supportedLocales } from './config.js'
+const webpack = require("webpack");
+const {supportedLocales} = require("./config.js")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
