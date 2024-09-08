@@ -1,0 +1,85 @@
+aside {
+    min-width: 20%;
+    position: absolute;
+    left: 0;
+}
+.sidebar {
+    background-color: #f2eff58f;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 2rem;
+}
+.new-task, .new-category{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+    background: url('/assets/plus.png') no-repeat;
+    background-size: cover;
+}
+
+.new-task:hover, .new-category:hover{
+    cursor: pointer;
+}
+.button-container {
+    position: relative;
+    margin-top: 1.5em;
+    margin-right: 1rem;
+
+}
+.button-text {
+    margin-top: 5px;
+    padding-left: 5px;
+    position: absolute;
+    font-family: "Roboto";
+    font-size: 1rem;
+}
+
+.sidebar-button {
+    border: none;
+    background-color: #f2eff58f;
+    color: #DB504A;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.sidebar-item {
+  
+    display: flex;
+    max-width:100%;
+}
+.sidebar-item {
+    padding: 0.5rem 0.3rem;
+}
+.button-container {
+    padding: 0.5rem 0;
+}
+.sidebar-item:hover, .button-container:hover  {
+    cursor: pointer;
+    background-color: #dbd9df8f;
+    border-radius: 5px;
+}
+
+.add-category {
+    margin-left: 8rem;
+}
+
+.hide {
+    display: none;
+}
+
+.submit-category {
+    border: none;
+    background-color: #f2eff58f;
+    border-radius: 5px;
+    border: 1px solid green;
+    padding: 5px;
+}
+.submit-category:hover {
+    cursor: pointer;
+}
+
+
+
