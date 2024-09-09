@@ -1,5 +1,6 @@
 aside {
-    min-width: 20%;
+    width: 20%;
+    max-width: 20%;
     position: absolute;
     left: 0;
 }
@@ -63,7 +64,9 @@ aside {
 }
 
 .add-category {
-    margin-left: 8rem;
+    margin-left: 4.5rem;
+    max-width: 23%;
+    font-size: 0.8rem;
 }
 
 .hide {
@@ -72,10 +75,10 @@ aside {
 
 .submit-category {
     border: none;
+    min-width:10%;
     background-color: #f2eff58f;
     border-radius: 5px;
     border: 1px solid green;
-    padding: 5px;
 }
 .submit-category:hover {
     cursor: pointer;

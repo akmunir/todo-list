@@ -4,7 +4,7 @@ export const createCategory = ()=> {
     const input = document.createElement("input");
     input.classList.add("add-category");
     input.classList.add("hide");
-    input.placeholder = "Enter Category";
+    input.placeholder = "Category";
     const submitCategory = document.createElement("button");
     submitCategory.innerText = "Add";
     submitCategory.classList.add("submit-category");
@@ -37,9 +37,9 @@ export const createCategory = ()=> {
 
 }
 
-export const categoryList = class {
-    static taskCount = [];
-    addCategory(category) {
-        taskCount.push(category);
-    }
+export const categoryList =  {
+     categoryCount: [],
+     addCategory: (category) => {
+        categoryList.categoryCount.push(category);
+    },
 }

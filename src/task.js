@@ -1,6 +1,7 @@
 import { format, toDate} from "date-fns";
 export const Task = class {
     static taskCount = 1;
+    static taskList = [];
     constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
@@ -12,7 +13,6 @@ export const Task = class {
     getTitle() {
         return this.title;
     }
-
     getDueDate() {
         return this.dueDate;
     }
@@ -47,7 +47,11 @@ export const createTask = () => {
     descriptionInput.value = "";
     dueDateInput.classList.remove("selected");
     Task.taskCount++;
-    console.log(taskInfo);
+    Task.taskList.push(taskInfo);
     return new Task(...taskInfo);
+}
+
+export const deleteTask = () => {
+
 }
 

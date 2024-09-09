@@ -1,38 +1,43 @@
-import {createTask, Task} from "./task.js"; //fix later so i dont need to importg into this file
-export const displayTaskCreation = () => {
-    const taskCreation = document.querySelector(".creation-modal");
+import {createTask, Task} from "./task.js";
+
+export const displayModal = ()=> {
+    const taskModal = document.querySelector(".task-modal");
     const priorityDisplay = document.querySelector(".dropbtn");
     const prioritySelection = document.querySelector(".dropdown-content");
     const form = document.querySelector('form');
     const cancelbtn = document.querySelector(".cancel")
     taskCreation.showModal();
-    prioritySelection.addEventListener("click", (event) => {
+    return {taskModal, priorityDisplay, prioritySelection, form, cancelbtn};
+}
+export const displayTaskCreation = () => {
+    const taskModal = displayModal();
+    
+    taskModal.prioritySelection.addEventListener("click", (event) => {
         if (event.target.classList.contains("low")) {
             event.target.classList.add("selected");
-            priorityDisplay.innerText = "Low";
+            taskModal.priorityDisplay.innerText = "Low";
         } else if (event.target.classList.contains("med")) {
             event.target.classList.add("selected");
-            priorityDisplay.innerText = "Medium";
+            taskModal.priorityDisplay.innerText = "Medium";
         } else if (event.target.classList.contains("high")) {
             event.target.classList.add("selected");
-            priorityDisplay.innerText = "High";
+            taskModal.priorityDisplay.innerText = "High";
         }
     })
-    cancelbtn.addEventListener("click", (event) => {
+    taskModal.cancelbtn.addEventListener("click", (event) => {
         if (event.target.classList.contains("cancel")) {
             taskCreation.close(); 
-            priorityDisplay.innerText = "Priority"  
-            form.reset();
+            taskModal.priorityDisplay.innerText = "Priority"  
+            taskModal.form.reset();
         } 
     })
     form.addEventListener("submit", (event) => {
-        console.log("display2");
         event.preventDefault();
         const task = createTask();
         if (task) {
             updateTaskList(task);
         }
-        priorityDisplay.innerText = "Priority"
+        taskModal.priorityDisplay.innerText = "Priority"
         taskCreation.close();
     });
 }
@@ -63,4 +68,8 @@ export const updateTaskCount = () => {
     } else {
         numTasks.innerText = `${Task.taskCount} tasks`
     }
+}
+
+export const editTaskInfo = () => {
+
 }
