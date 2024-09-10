@@ -6,39 +6,42 @@ export const displayModal = ()=> {
     const prioritySelection = document.querySelector(".dropdown-content");
     const form = document.querySelector('form');
     const cancelbtn = document.querySelector(".cancel")
-    taskCreation.showModal();
-    return {taskModal, priorityDisplay, prioritySelection, form, cancelbtn};
+    const title = document.querySelector("#title");
+    const description = document.querySelector("#description");
+    const date = document.querySelector("#date");
+    taskModal.showModal();
+    return {taskModal, priorityDisplay, prioritySelection, form, cancelbtn, title, description, date};
 }
 export const displayTaskCreation = () => {
-    const taskModal = displayModal();
+    const modal = displayModal();
     
-    taskModal.prioritySelection.addEventListener("click", (event) => {
+    modal.prioritySelection.addEventListener("click", (event) => {
         if (event.target.classList.contains("low")) {
             event.target.classList.add("selected");
-            taskModal.priorityDisplay.innerText = "Low";
+            modal.priorityDisplay.innerText = "Low";
         } else if (event.target.classList.contains("med")) {
             event.target.classList.add("selected");
-            taskModal.priorityDisplay.innerText = "Medium";
+            modal.priorityDisplay.innerText = "Medium";
         } else if (event.target.classList.contains("high")) {
             event.target.classList.add("selected");
-            taskModal.priorityDisplay.innerText = "High";
+            modal.priorityDisplay.innerText = "High";
         }
     })
-    taskModal.cancelbtn.addEventListener("click", (event) => {
+    modal.cancelbtn.addEventListener("click", (event) => {
         if (event.target.classList.contains("cancel")) {
-            taskCreation.close(); 
-            taskModal.priorityDisplay.innerText = "Priority"  
-            taskModal.form.reset();
+            modal.taskModal.close(); 
+            modal.priorityDisplay.innerText = "Priority"  
+            modal.form.reset();
         } 
     })
-    form.addEventListener("submit", (event) => {
+    modal.form.addEventListener("submit", (event) => {
         event.preventDefault();
         const task = createTask();
         if (task) {
             updateTaskList(task);
         }
-        taskModal.priorityDisplay.innerText = "Priority"
-        taskCreation.close();
+        modal.priorityDisplay.innerText = "Priority"
+        modal.taskModal.close();
     });
 }
 
@@ -53,6 +56,7 @@ export const updateTaskList = (task) => {
     taskDueDate.innerText = task.getDueDate();
     listElement.innerText = task.getTitle();
     listElement.classList.add("task");
+    listElement.classList.add(task.getTitle());
     taskContainer.appendChild(listElement);
     taskContainer.appendChild(taskDueDate);
     list.appendChild(taskContainer);
@@ -70,6 +74,12 @@ export const updateTaskCount = () => {
     }
 }
 
-export const editTaskInfo = () => {
+export const editTaskInfo = (task) => {
+    const taskModal = displayModal();
+    taskModal.title.value = task.title;
+    taskModal.description.value = task.description;
+    console.log(task.dueDate)
+    taskModal.date.value = task.dueDate;
+    taskModal.priorityDisplay.innerText = task.priority;
 
 }

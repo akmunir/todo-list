@@ -9,6 +9,7 @@ export const Task = class {
         this.priority = priority;
         this.category = "";
         this.complete = false;
+        this.formattedDate = "";
     }
     getTitle() {
         return this.title;
@@ -16,8 +17,17 @@ export const Task = class {
     getDueDate() {
         return this.dueDate;
     }
+    getDescription() {
+        return this.description;
+    }
+    getPriority() {
+        return this.priority;
+    }
     format() {
         return `${title} ${description} ${this.dueDate} ${this.priority} ${notes}`;
+    }
+    setformattedDate(date) {
+        this.formattedDate = date;
     }
 }
 
@@ -32,6 +42,7 @@ export const createTask = () => {
     let dueMonth = dueDateInput.value.substring(5, 7);
     let dueDay = dueDateInput.value.substring(8);
     let dueDate = new Date(dueYear, dueMonth, dueDay);
+    const formattedDueDate = dueDate;
     console.log(dueDate);
     dueDate = format(dueDate, "'due' PPPP");
     const taskInfo = [
@@ -47,8 +58,11 @@ export const createTask = () => {
     descriptionInput.value = "";
     dueDateInput.classList.remove("selected");
     Task.taskCount++;
-    Task.taskList.push(taskInfo);
-    return new Task(...taskInfo);
+    const newTask = new Task(...taskInfo)
+    newTask.setformattedDate(formattedDueDate);
+    console.log(newTask.dueDate.substring(4))
+    Task.taskList.push(newTask);
+    return newTask;
 }
 
 export const deleteTask = () => {
