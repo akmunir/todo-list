@@ -78,8 +78,7 @@ export const editTaskInfo = (task) => {
     const taskModal = displayModal();
     taskModal.title.value = task.title;
     taskModal.description.value = task.description;
-    console.log(task.dueDate)
-    taskModal.date.value = task.dueDate;
+    taskModal.date.value = task.formattedDate;
     taskModal.priorityDisplay.innerText = task.priority;
 
 }

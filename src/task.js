@@ -36,14 +36,12 @@ export const createTask = () => {
     const titleInput = document.querySelector('form input[name="title"]');
     const descriptionInput = document.querySelector('form input[name="description"]');
     const dueDateInput = document.querySelector('form input[name="dueDate"]');
-    console.log(dueDateInput.value);
     const priorityInput = document.querySelector('form .selected');
     let dueYear = dueDateInput.value.substring(0, 4);
     let dueMonth = dueDateInput.value.substring(5, 7);
     let dueDay = dueDateInput.value.substring(8);
     let dueDate = new Date(dueYear, dueMonth, dueDay);
-    const formattedDueDate = dueDate;
-    console.log(dueDate);
+    const formattedDueDate = dueDateInput.value;
     dueDate = format(dueDate, "'due' PPPP");
     const taskInfo = [
         titleInput.value.trim(),
@@ -60,7 +58,6 @@ export const createTask = () => {
     Task.taskCount++;
     const newTask = new Task(...taskInfo)
     newTask.setformattedDate(formattedDueDate);
-    console.log(newTask.dueDate.substring(4))
     Task.taskList.push(newTask);
     return newTask;
 }
