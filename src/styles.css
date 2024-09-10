@@ -54,3 +54,7 @@ main {
     left: 10%;
     font-size: 0.8rem;
 }
+
+.task-list:hover {
+    background-color: #f4ecec;
+}
