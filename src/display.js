@@ -9,12 +9,12 @@ export const displayModal = ()=> {
     const title = document.querySelector("#title");
     const description = document.querySelector("#description");
     const date = document.querySelector("#date");
+    const deletionButton = document.querySelector(".deletion-button");
     taskModal.showModal();
-    return {taskModal, priorityDisplay, prioritySelection, form, cancelbtn, title, description, date};
+    return {taskModal, priorityDisplay, prioritySelection, form, cancelbtn, title, description, date, deletionButton};
 }
 export const displayTaskCreation = () => {
     const modal = displayModal();
-    
     modal.prioritySelection.addEventListener("click", (event) => {
         if (event.target.classList.contains("low")) {
             event.target.classList.add("selected");
@@ -76,9 +76,13 @@ export const updateTaskCount = () => {
 
 export const editTaskInfo = (task) => {
     const taskModal = displayModal();
+    taskModal.deletionButton.classList.toggle("hide");
     taskModal.title.value = task.title;
     taskModal.description.value = task.description;
     taskModal.date.value = task.formattedDate;
     taskModal.priorityDisplay.innerText = task.priority;
+}
+
+export const taskDeletion = ()=> {
 
 }

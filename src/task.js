@@ -62,7 +62,13 @@ export const createTask = () => {
     return newTask;
 }
 
-export const deleteTask = () => {
-
+export const deleteTask = (taskName) => {
+    for (let task of Task.taskList) {
+        if (task.title === taskName) {
+            Task.taskList.remove(task);
+            break;
+        }
+    }
+    Task.taskCount--;
 }
 

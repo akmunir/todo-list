@@ -12,8 +12,6 @@ createCategory();
 newTaskButton.addEventListener("click", (event) => {
     displayTaskCreation();
 })
-console.log(Task.taskList);
-
 taskList.addEventListener("click", (event)=> {
         for (let task of Task.taskList) {
             if (event.target.classList.contains(task.title)) {

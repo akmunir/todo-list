@@ -58,3 +58,7 @@ main {
 .task-list:hover {
     background-color: #f4ecec;
 }
+
+.hide {
+    display: none;
+}
