@@ -1,5 +1,6 @@
 import {createTask, Task} from "./task.js";
 
+
 export const displayModal = ()=> {
     const taskModal = document.querySelector(".task-modal");
     const priorityDisplay = document.querySelector(".dropbtn");
@@ -9,7 +10,7 @@ export const displayModal = ()=> {
     const title = document.querySelector("#title");
     const description = document.querySelector("#description");
     const date = document.querySelector("#date");
-    const deletionButton = document.querySelector(".deletion-button");
+    const deletionButton = document.querySelector(".modal-button");
     taskModal.showModal();
     return {taskModal, priorityDisplay, prioritySelection, form, cancelbtn, title, description, date, deletionButton};
 }
@@ -29,10 +30,8 @@ export const displayTaskCreation = () => {
     })
     modal.cancelbtn.addEventListener("click", (event) => {
         if (event.target.classList.contains("cancel")) {
-            modal.taskModal.close(); 
-            modal.priorityDisplay.innerText = "Priority"  
-            modal.form.reset();
-        } 
+            emptyModal(modal);
+        }
     })
     modal.form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -44,6 +43,15 @@ export const displayTaskCreation = () => {
         modal.taskModal.close();
     });
 }
+
+
+export const emptyModal = (modal)=> {
+    modal.taskModal.close();
+    modal.priorityDisplay.innerText = "Priority"  
+    modal.form.reset();
+}
+
+
 
 
 export const updateTaskList = (task) => {
@@ -63,16 +71,18 @@ export const updateTaskList = (task) => {
     updateTaskCount();
 }
 
+
 export const updateTaskCount = () => {
-    const numTasks = document.querySelector(".num-tasks"); 
+    const numTasks = document.querySelector(".num-tasks");
     if (Task.taskCount === 0) {
         numTasks.innerText = "No tasks!";
-    } else if (Task.taskCount === 0) {
+    } else if (Task.taskCount === 1) {
         numTasks.innerText = `${Task.taskCount} task`
     } else {
         numTasks.innerText = `${Task.taskCount} tasks`
     }
 }
+
 
 export const editTaskInfo = (task) => {
     const taskModal = displayModal();
@@ -83,6 +93,8 @@ export const editTaskInfo = (task) => {
     taskModal.priorityDisplay.innerText = task.priority;
 }
 
-export const taskDeletion = ()=> {
+
+export const taskDeletion = (task)=> {
+
 
 }

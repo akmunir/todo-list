@@ -1,6 +1,6 @@
 import { format, toDate} from "date-fns";
 export const Task = class {
-    static taskCount = 1;
+    static taskCount = 0;
     static taskList = [];
     constructor(title, description, dueDate, priority) {
         this.title = title;
@@ -30,6 +30,8 @@ export const Task = class {
         this.formattedDate = date;
     }
 }
+
+
 
 
 export const createTask = () => {
@@ -62,6 +64,7 @@ export const createTask = () => {
     return newTask;
 }
 
+
 export const deleteTask = (taskName) => {
     for (let task of Task.taskList) {
         if (task.title === taskName) {
@@ -71,4 +74,3 @@ export const deleteTask = (taskName) => {
     }
     Task.taskCount--;
 }
-
