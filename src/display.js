@@ -1,4 +1,4 @@
-import {createTask, Task} from "./task.js";
+import {createTask, deleteTask, Task} from "./task.js";
 
 
 export const displayModal = ()=> {
@@ -31,6 +31,9 @@ export const displayTaskCreation = () => {
     modal.cancelbtn.addEventListener("click", (event) => {
         if (event.target.classList.contains("cancel")) {
             emptyModal(modal);
+            if (!(modal.deletionButton.classList.contains("hide"))) {
+                modal.deletionButton.classList.toggle("hide");
+            }
         }
     })
     modal.form.addEventListener("submit", (event) => {
@@ -45,10 +48,12 @@ export const displayTaskCreation = () => {
 }
 
 
-export const emptyModal = (modal)=> {
-    modal.taskModal.close();
-    modal.priorityDisplay.innerText = "Priority"  
+export const emptyModal = (modal = displayModal())=> {
+    modal.priorityDisplay.innerText = "Priority" 
+    const title = modal.form.title 
     modal.form.reset();
+    modal.taskModal.close();
+    return title;
 }
 
 
@@ -65,6 +70,7 @@ export const updateTaskList = (task) => {
     listElement.innerText = task.getTitle();
     listElement.classList.add("task");
     listElement.classList.add(task.getTitle());
+    taskContainer.setAttribute("data-","isActiveTask");
     taskContainer.appendChild(listElement);
     taskContainer.appendChild(taskDueDate);
     list.appendChild(taskContainer);
@@ -94,7 +100,15 @@ export const editTaskInfo = (task) => {
 }
 
 
-export const taskDeletion = (task)=> {
-
-
+export const removeTaskFromList = (taskTitle) => {
+    console.log("a")
+    const taskList = document.querySelector(".task-list");
+    const tasks = taskList.children;
+    for (let task of tasks) {
+        console.log(task)
+        if (task.classList.contains(taskTitle)) {
+            console.log("c")
+            taskList.remove(task);
+        }
+    }
 }

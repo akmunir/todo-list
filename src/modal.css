@@ -136,7 +136,7 @@ input {
 .deletion-button {
     color: white;
     background-color: red;
-    padding: 6px 8px;
+    padding: 10px 8px;
     font-size: 0.8rem;
-    margin-left: auto;
+    margin-left: 23rem;
 }
