@@ -16,6 +16,7 @@ export const displayModal = ()=> {
 }
 export const displayTaskCreation = () => {
     const modal = displayModal();
+    modal.deletionButton.classList.toggle("hide");
     modal.prioritySelection.addEventListener("click", (event) => {
         if (event.target.classList.contains("low")) {
             event.target.classList.add("selected");
@@ -50,7 +51,7 @@ export const displayTaskCreation = () => {
 
 export const emptyModal = (modal = displayModal())=> {
     modal.priorityDisplay.innerText = "Priority" 
-    const title = modal.form.title 
+    const title = modal.form.title.value;
     modal.form.reset();
     modal.taskModal.close();
     return title;
@@ -102,13 +103,16 @@ export const editTaskInfo = (task) => {
 
 export const removeTaskFromList = (taskTitle) => {
     console.log("a")
+    console.log("tasktitle " + taskTitle)
     const taskList = document.querySelector(".task-list");
     const tasks = taskList.children;
-    for (let task of tasks) {
-        console.log(task)
-        if (task.classList.contains(taskTitle)) {
-            console.log("c")
-            taskList.remove(task);
+    for (let taskContainer of tasks) {
+        for (let task of taskContainer.children) {
+            console.log(task)
+            if (task.classList.contains(taskTitle)) {
+                console.log(taskContainer)
+                taskList.removeChild(taskContainer);
+            }
         }
     }
 }
