@@ -1,6 +1,7 @@
 import { format, toDate, isToday} from "date-fns";
 export const Task = class {
-    static taskCount = 0;
+    static todaysTasksCount = 0;
+    static upcomingTasksCount = 0;
     static taskList = [];
     constructor(title, description, dueDate, priority) {
         this.title = title;
@@ -60,19 +61,23 @@ export const createTask = () => {
     titleInput.value = "";
     descriptionInput.value = "";
     dueDateInput.classList.remove("selected");
-    Task.taskCount++;
     const newTask = new Task(...taskInfo)
+    if (newTask.isDueToday()) Task.todaysTasksCount++;
+    else Task.upcomingTasksCount++;
     Task.taskList.push(newTask);
     return newTask;
 }
 
 
 export const deleteTask = (taskName) => {
+    let task;
     for (let i = 0; i < Task.taskList.length; i++) {
         if (Task.taskList[i].title === taskName) {
+            task = Task.taskList[i];
             Task.taskList.splice(i, 1);
             break;
         }
     }
-    Task.taskCount--;
+    if (task.isDueToday) Task.todaysTasksCount--;
+    else Task.upcomingTasksCount--;
 }

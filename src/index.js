@@ -13,6 +13,7 @@ const deleteTaskButton = document.querySelector(".deletion-button");
 const todaysTasksButton = document.querySelector(".today");
 const upcomingTasksButton = document.querySelector(".upcoming");
 createCategory();
+displayTodaysTasks();
 newTaskButton.addEventListener("click", (event) => {
     if ((deleteTaskButton.classList.contains("hide"))) {
         deleteTaskButton.classList.toggle("hide");

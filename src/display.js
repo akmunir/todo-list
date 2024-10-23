@@ -49,6 +49,8 @@ export const displayTaskCreation = () => {
         }
         if (task) {
             updateTaskList(task);
+            if (task.isDueToday()) displayTodaysTasks();
+            else displayUpcomingTasks();
         }
         modal.priorityDisplay.innerText = "Priority"
         modal.taskModal.close();
@@ -69,7 +71,6 @@ export const emptyModal = (modal = displayModal())=> {
 
 
 export const updateTaskList = (task) => {
-    const list = document.querySelector(".task-list");
     const listElement = document.createElement("li");
     const taskContainer = document.createElement("div");
     const taskDueDate = document.createElement("span");
@@ -78,24 +79,36 @@ export const updateTaskList = (task) => {
     taskDueDate.innerText = task.getDueDate();
     listElement.innerText = task.getTitle();
     listElement.classList.add("task");
-    listElement.classList.add(task.getTitle());
+    listElement.classList.add(task.getTitle().replaceAll(/\s/g, ""));
     taskContainer.setAttribute("data-","isActiveTask");
     taskContainer.appendChild(listElement);
     taskContainer.appendChild(taskDueDate);
-    list.appendChild(taskContainer);
-    updateTaskCount();
+    return taskContainer;
 }
 
 
 export const updateTaskCount = () => {
     const numTasks = document.querySelector(".num-tasks");
-    if (Task.taskCount <= 0) {
+    if(document.querySelector(".main-text").classList.contains("upcoming")) {
+        console.log("upcoming " + Task.upcomingTasksCount);
+        if (Task.upcomingTasksCount <= 0) {
         numTasks.innerText = "No Tasks Today";
-    } else if (Task.taskCount === 1) {
-        numTasks.innerText = `${Task.taskCount} task`
+         } else if (Task.upcomingTasksCount === 1) {
+         numTasks.innerText = `${Task.upcomingTasksCount} task`
+        } else {
+        numTasks.innerText = `${Task.upcomingTasksCount} tasks`
+        }
     } else {
-        numTasks.innerText = `${Task.taskCount} tasks`
+        console.log("today " + Task.todaysTasksCount);
+        if (Task.todaysTasksCount <= 0) {
+        numTasks.innerText = "No Tasks Today";
+        } else if (Task.todaysTasksCount === 1) {
+        numTasks.innerText = `${Task.todaysTasksCount} task`
+        } else {
+        numTasks.innerText = `${Task.todaysTasksCount} tasks`
+        }
     }
+    
 }
 
 
@@ -145,22 +158,31 @@ export const displayTodaysTasks = ()=> {
 };
 
 const addTodaysTasksToList = ()=> {
+    const mainText = document.querySelector(".main-text");
+    const list = document.querySelector(".task-list");
+    mainText.classList.toggle("today");
+    if (mainText.classList.contains("upcoming")) mainText.classList.toggle("upcoming");
     const taskList = document.querySelector(".task-list");
     for(let task of Task.taskList) {
         if (task.isDueToday()) {
-            updateTaskList(task);
+            list.appendChild(updateTaskList(task));
+            updateTaskCount();
         }
     }
     updateTaskCount();
 }
 
 const addUpcomingTasksToList = ()=> {
-    let upcomingTaskCount = 0;
+    const mainText = document.querySelector(".main-text");
+    const list = document.querySelector(".task-list");
+    mainText.classList.toggle("upcoming");
+    if (mainText.classList.contains("today")) mainText.classList.toggle("today");
     console.log(Task.taskList)
     const taskList = document.querySelector(".task-list");
     for(let task of Task.taskList) {
         if(!task.isDueToday()) {
-            updateTaskList(task);
+            list.appendChild(updateTaskList(task));
+            updateTaskCount();
         }
     }
     updateTaskCount();
