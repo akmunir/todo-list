@@ -42,7 +42,7 @@ input {
 }
 
 
-#add {
+.submit-task {
     background-color: #e29948;
     border-radius: 5px;
     padding: 10px 15px;
@@ -51,10 +51,13 @@ input {
 }
 
 
-#add:hover {
+.submit-task:hover {
     box-shadow: 1px -1px 5px rgb(14, 212, 247);
     cursor: pointer;
     background-color: #d39043;
+}
+.dropdown-buttons-container {
+    display: flex;
 }
 
 

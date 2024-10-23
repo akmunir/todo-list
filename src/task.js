@@ -1,21 +1,27 @@
-import { format, toDate} from "date-fns";
+import { format, toDate, isToday} from "date-fns";
 export const Task = class {
     static taskCount = 0;
     static taskList = [];
     constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
         this.priority = priority;
         this.category = "";
         this.complete = false;
-        this.formattedDate = "";
+        this.dueDate = dueDate
+        console.log(dueDate)
+        let dueYear = dueDate.substring(0, 4);
+        let dueMonth = dueDate.substring(5, 7);
+        console.log(dueMonth + " due month");
+        let dueDay = dueDate.substring(8);
+        this.dueDate = new Date(dueYear, dueMonth - 1, dueDay);
+        this.formattedDate = format(this.dueDate, "PPP");
     }
     getTitle() {
         return this.title;
     }
     getDueDate() {
-        return this.dueDate;
+        return "due " + this.formattedDate;
     }
     getDescription() {
         return this.description;
@@ -26,8 +32,11 @@ export const Task = class {
     format() {
         return `${title} ${description} ${this.dueDate} ${this.priority} ${notes}`;
     }
-    setformattedDate(date) {
+    FormattedDate(date) {
         this.formattedDate = date;
+    }
+    isDueToday() {
+        return isToday(this.dueDate);
     }
 }
 
@@ -39,16 +48,10 @@ export const createTask = () => {
     const descriptionInput = document.querySelector('form input[name="description"]');
     const dueDateInput = document.querySelector('form input[name="dueDate"]');
     const priorityInput = document.querySelector('form .selected');
-    let dueYear = dueDateInput.value.substring(0, 4);
-    let dueMonth = dueDateInput.value.substring(5, 7);
-    let dueDay = dueDateInput.value.substring(8);
-    let dueDate = new Date(dueYear, dueMonth, dueDay);
-    const formattedDueDate = dueDateInput.value;
-    dueDate = format(dueDate, "'due' PPPP");
     const taskInfo = [
         titleInput.value.trim(),
         descriptionInput.value.trim(),
-        dueDate,
+        dueDateInput.value,
         priorityInput.value.trim(),
     ];
     if (!taskInfo[0]) {
@@ -59,16 +62,15 @@ export const createTask = () => {
     dueDateInput.classList.remove("selected");
     Task.taskCount++;
     const newTask = new Task(...taskInfo)
-    newTask.setformattedDate(formattedDueDate);
     Task.taskList.push(newTask);
     return newTask;
 }
 
 
 export const deleteTask = (taskName) => {
-    for (let i = 0; i < Task.taskList; i++) {
-        if (task.title === taskName) {
-            Task.taskList.remove(Task.taskList[i]);
+    for (let i = 0; i < Task.taskList.length; i++) {
+        if (Task.taskList[i].title === taskName) {
+            Task.taskList.splice(i, 1);
             break;
         }
     }

@@ -22,10 +22,10 @@
                 <span class="button-text">New Task</span>
             </div>
             <div class="sidebar-item">
-                <button class="sidebar-button">Today</button>
+                <button class="sidebar-button today">Today</button>
             </div>
             <div class="sidebar-item">
-                <button class="sidebar-button">Upcoming</button>
+                <button class="sidebar-button upcoming">Upcoming</button>
             </div>
             <div class="button-container category-container">
                 <button class="new-category"></button>
@@ -33,7 +33,8 @@
             </div>
         </aside>
     <main>
-        <h1 class="main-text">Today <br> <span class="num-tasks">No Tasks Today</span></h1>
+            <h1 class="main-text">Today <br> 
+                <span class="num-tasks">No Tasks</span></h1>
         <ul class="task-list">
         </ul>
     </main>
@@ -64,12 +65,10 @@
                 </div>
                 <div class="task-creation-buttons">
                     <button type="button" class="cancel modal-button">Cancel</button>
-                    <input id="add" type="submit" value="Add Task">
+                    <input class="submit-task" id="submit" type="submit" value="Add Task">
                 </div>
             </form>
         </dialog>
     </div>
 </body>
-
-
 </html>

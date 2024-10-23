@@ -34,7 +34,6 @@ main {
 .main-text {
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 2rem;
 }
 
 .num-tasks {
@@ -55,7 +54,7 @@ main {
     font-size: 0.8rem;
 }
 
-.task-list:hover {
+.task-container:hover {
     background-color: #f4ecec;
 }
 

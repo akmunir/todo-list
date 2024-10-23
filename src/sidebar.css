@@ -47,7 +47,6 @@ aside {
 }
 
 .sidebar-item {
-  
     display: flex;
     max-width:100%;
 }
@@ -61,6 +60,9 @@ aside {
     cursor: pointer;
     background-color: #dbd9df8f;
     border-radius: 5px;
+}
+.sidebar-button:hover {
+    cursor: pointer;
 }
 
 .add-category {
