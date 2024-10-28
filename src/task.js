@@ -3,11 +3,11 @@ export const Task = class {
     static todaysTasksCount = 0;
     static upcomingTasksCount = 0;
     static taskList = [];
-    constructor(title, description, dueDate, priority) {
+    constructor(title, description, dueDate, priority, category) {
         this.title = title;
         this.description = description;
         this.priority = priority;
-        this.category = "";
+        this.category = category;
         this.complete = false;
         this.dueDate = dueDate
         console.log(dueDate)
@@ -48,12 +48,14 @@ export const createTask = () => {
     const titleInput = document.querySelector('form input[name="title"]');
     const descriptionInput = document.querySelector('form input[name="description"]');
     const dueDateInput = document.querySelector('form input[name="dueDate"]');
-    const priorityInput = document.querySelector('form .selected');
+    const priorityInput = document.querySelector(".priority");
+    const categoryInput = document.querySelector(".cat")
     const taskInfo = [
         titleInput.value.trim(),
         descriptionInput.value.trim(),
         dueDateInput.value,
-        priorityInput.value.trim(),
+        priorityInput.value,
+        categoryInput.value,
     ];
     if (!taskInfo[0]) {
         return null;
@@ -65,6 +67,7 @@ export const createTask = () => {
     if (newTask.isDueToday()) Task.todaysTasksCount++;
     else Task.upcomingTasksCount++;
     Task.taskList.push(newTask);
+    console.log(newTask);
     return newTask;
 }
 

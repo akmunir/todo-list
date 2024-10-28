@@ -1,5 +1,5 @@
 import {Task, createTask, deleteTask} from "./task.js";
-import {displayTaskCreation, editTaskInfo, emptyModal, updateTaskCount, updateTaskList, removeTaskFromList, displayUpcomingTasks, displayTodaysTasks} from "./display.js";
+import {displayTaskCreation, editTaskInfo, emptyModal, updateTaskCount, updateTaskList, removeTaskFromList, displayUpcomingTasks, displayTodaysTasks, displayTasksByCategory} from "./display.js";
 import { createCategory } from "./category.js";
 import "./styles.css";
 import "./reset.css";
@@ -12,6 +12,7 @@ const taskList = document.querySelector(".task-list");
 const deleteTaskButton = document.querySelector(".deletion-button");
 const todaysTasksButton = document.querySelector(".today");
 const upcomingTasksButton = document.querySelector(".upcoming");
+const categorySidebar = document.querySelector(".categories");
 createCategory();
 displayTodaysTasks();
 newTaskButton.addEventListener("click", (event) => {
@@ -46,4 +47,11 @@ todaysTasksButton.addEventListener("click", (event) => {
 upcomingTasksButton.addEventListener("click", (event) => {
     console.log("upcoming");
     displayUpcomingTasks();
+})
+categorySidebar.addEventListener("click", (event) => {
+    if (event.target.classList.contains("sidebar-item")) {
+        const catName = event.target.children[0].innerText;
+        console.log(catName)
+        displayTasksByCategory(catName);
+    }
 })

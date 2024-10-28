@@ -31,6 +31,9 @@
                 <button class="new-category"></button>
                 <span class="button-text">Category</span>
             </div>
+            <div class="categories">
+                
+            </div>
         </aside>
     <main>
             <h1 class="main-text">Today <br> 
@@ -49,23 +52,20 @@
                 </div>
                 <input id="description"="text" name="description" placeholder="Task Description">
                 <input id="date" type="date" name="dueDate" placeholder="Due Today" required>
-                <div class="dropdown">
-                    <div class="dropbtn">Priority</div>
-                    <div class="dropdown-content">
-                        <div>
-                            <input type="button" class="low" value="Low">
-                        </div>
-                        <div>
-                            <input type="button" class="med" value="Medium">
-                        </div>
-                        <div>
-                            <input type="button" class="high" value="High">
-                        </div>
-                    </div>
-                </div>
-                <div class="task-creation-buttons">
+                <div class="dropdown-container">
+                    <select class="dropbtn cat">
+                    <option value="">Category</option>
+                    </select>
+                    <select class="dropbtn priority">
+                    <option value="">Priority</option>
+                    <option value="low">Low</option>
+                    <option value="med">Medium</option>
+                    <option value="high">High</option>
+                    </select>
+                    <div class="task-creation-buttons">
                     <button type="button" class="cancel modal-button">Cancel</button>
                     <input class="submit-task" id="submit" type="submit" value="Add Task">
+                    </div>
                 </div>
             </form>
         </dialog>

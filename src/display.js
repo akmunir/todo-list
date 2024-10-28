@@ -3,33 +3,21 @@ import {createTask, deleteTask, Task} from "./task.js";
 
 export const displayModal = ()=> {
     const taskModal = document.querySelector(".task-modal");
-    const priorityDisplay = document.querySelector(".dropbtn");
-    const prioritySelection = document.querySelector(".dropdown-content");
+    const prioritySelection = document.querySelector(".dropbtn");
     const form = document.querySelector('form');
     const cancelbtn = document.querySelector(".cancel")
     const title = document.querySelector("#title");
     const description = document.querySelector("#description");
     const date = document.querySelector("#date");
     const deletionButton = document.querySelector(".modal-button");
-    const submitTask = document.querySelector(".submit-task");
+    const categorySelection = document.querySelector(".cat");
+    const submitTask = document.querySelector(".submit-task"); 
     taskModal.showModal();
-    return {taskModal, priorityDisplay, prioritySelection, form, cancelbtn, title, description, date, deletionButton, submitTask};
+    return {taskModal, prioritySelection, form, cancelbtn, title, description, date, deletionButton, categorySelection, submitTask};
 }
 export const displayTaskCreation = () => {
     const modal = displayModal();
     modal.deletionButton.classList.toggle("hide");
-    modal.prioritySelection.addEventListener("click", (event) => {
-        if (event.target.classList.contains("low")) {
-            event.target.classList.add("selected");
-            modal.priorityDisplay.innerText = "Low";
-        } else if (event.target.classList.contains("med")) {
-            event.target.classList.add("selected");
-            modal.priorityDisplay.innerText = "Medium";
-        } else if (event.target.classList.contains("high")) {
-            event.target.classList.add("selected");
-            modal.priorityDisplay.innerText = "High";
-        }
-    })
     modal.cancelbtn.addEventListener("click", (event) => {
         if (event.target.classList.contains("cancel")) {
             emptyModal(modal);
@@ -52,7 +40,6 @@ export const displayTaskCreation = () => {
             if (task.isDueToday()) displayTodaysTasks();
             else displayUpcomingTasks();
         }
-        modal.priorityDisplay.innerText = "Priority"
         modal.taskModal.close();
         modal.submitTask.value = "Add Task";
     });
@@ -60,7 +47,6 @@ export const displayTaskCreation = () => {
 
 
 export const emptyModal = (modal = displayModal())=> {
-    modal.priorityDisplay.innerText = "Priority" 
     const title = modal.form.title.value;
     modal.form.reset();
     modal.taskModal.close();
@@ -119,7 +105,6 @@ export const editTaskInfo = (task) => {
     taskModal.title.value = task.title;
     taskModal.description.value = task.description;
     taskModal.date.value = task.formattedDate;
-    taskModal.priorityDisplay.innerText = task.priority;
     taskModal.submitTask.value = "Edit Task";
 }
 
@@ -156,6 +141,10 @@ export const displayTodaysTasks = ()=> {
     taskList.innerHTML = "";
     addTodaysTasksToList();
 };
+
+export const displayTasksByCategory = (catName)=> {
+    
+}
 
 const addTodaysTasksToList = ()=> {
     const mainText = document.querySelector(".main-text");

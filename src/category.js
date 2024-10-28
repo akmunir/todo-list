@@ -1,6 +1,6 @@
 export const createCategory = ()=> {
     const categoryContainer = document.querySelector(".category-container");
-    const sidebar = document.querySelector("aside");
+    const categoryContent = document.querySelector(".categories");
     const input = document.createElement("input");
     input.classList.add("add-category");
     input.classList.add("hide");
@@ -30,7 +30,7 @@ export const createCategory = ()=> {
             category.classList.add("sidebar-button")
             item.appendChild(category);
             categoryList.addCategory(input.value);
-            sidebar.appendChild(item);
+            categoryContent.appendChild(item);
             input.value = "";
         }
 });
@@ -41,5 +41,10 @@ export const categoryList =  {
      categoryCount: [],
      addCategory: (category) => {
         categoryList.categoryCount.push(category);
+        const dropdown = document.querySelector(".dropbtn");
+        const newCat = document.createElement("option");
+        newCat.value = category;
+        newCat.innerText = category;
+        dropdown.appendChild(newCat);
     },
 }
