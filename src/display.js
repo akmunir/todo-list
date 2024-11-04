@@ -37,8 +37,8 @@ export const displayTaskCreation = () => {
         }
         if (task) {
             updateTaskList(task);
-            if (task.isDueToday()) displayTodaysTasks();
-            else displayUpcomingTasks();
+            if (task.isDueToday()) displayTaskToggler("Today");
+            else displayTaskToggler("Upcoming");
         }
         modal.taskModal.close();
         modal.submitTask.value = "Add Task";
@@ -120,33 +120,29 @@ export const removeTaskFromList = (taskTitle) => {
         }
     }
 }
-
-export const displayUpcomingTasks = () => {
+export const displayTaskToggler = (taskSection)=> {
     const mainText = document.querySelector(".main-text");
     const taskList = document.querySelector(".task-list");
     const numTasks = document.querySelector(".num-tasks");
-    mainText.innerText = "Upcoming"
+    mainText.innerText = taskSection;
     mainText.appendChild(document.createElement("br"));
     mainText.appendChild(numTasks)
     taskList.innerHTML = "";
-    addUpcomingTasksToList();
-}
-export const displayTodaysTasks = ()=> {
-    const mainText = document.querySelector(".main-text");
-    const taskList = document.querySelector(".task-list");
-    const numTasks = document.querySelector(".num-tasks");
-    mainText.innerText = "Today"
-    mainText.appendChild(document.createElement("br"));
-    mainText.appendChild(numTasks)
-    taskList.innerHTML = "";
-    addTodaysTasksToList();
 };
 
-export const displayTasksByCategory = (catName)=> {
-    
+export const AddTasksByCat = (catName)=> {
+    const mainText = document.querySelector(".main-text");
+    const list = document.querySelector(".task-list");
+    mainText.classList.toggle(catName);
+    const taskList = document.querySelector(".task-list");
+    for(let task of Task.taskList) {
+        if(task.category === catName) {
+            list.appendChild(updateTaskList(task));
+        }
+    }    
 }
 
-const addTodaysTasksToList = ()=> {
+export const addTodaysTasksToList = ()=> {
     const mainText = document.querySelector(".main-text");
     const list = document.querySelector(".task-list");
     mainText.classList.toggle("today");
@@ -161,7 +157,7 @@ const addTodaysTasksToList = ()=> {
     updateTaskCount();
 }
 
-const addUpcomingTasksToList = ()=> {
+export const addUpcomingTasksToList = ()=> {
     const mainText = document.querySelector(".main-text");
     const list = document.querySelector(".task-list");
     mainText.classList.toggle("upcoming");

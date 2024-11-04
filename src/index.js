@@ -1,5 +1,5 @@
 import {Task, createTask, deleteTask} from "./task.js";
-import {displayTaskCreation, editTaskInfo, emptyModal, updateTaskCount, updateTaskList, removeTaskFromList, displayUpcomingTasks, displayTodaysTasks, displayTasksByCategory} from "./display.js";
+import {displayTaskCreation, editTaskInfo, emptyModal, updateTaskCount, updateTaskList, removeTaskFromList, AddTasksByCat, displayTaskToggler, addUpcomingTasksToList, addTodaysTasksToList} from "./display.js";
 import { createCategory } from "./category.js";
 import "./styles.css";
 import "./reset.css";
@@ -14,7 +14,7 @@ const todaysTasksButton = document.querySelector(".today");
 const upcomingTasksButton = document.querySelector(".upcoming");
 const categorySidebar = document.querySelector(".categories");
 createCategory();
-displayTodaysTasks();
+displayTaskToggler("Today");
 newTaskButton.addEventListener("click", (event) => {
     if ((deleteTaskButton.classList.contains("hide"))) {
         deleteTaskButton.classList.toggle("hide");
@@ -42,16 +42,19 @@ deleteTaskButton.addEventListener("click", (event)=> {
 
 todaysTasksButton.addEventListener("click", (event) => {
     console.log("displayTasks");
-    displayTodaysTasks();
+    displayTaskToggler("Today");
+    addTodaysTasksToList();
 })
 upcomingTasksButton.addEventListener("click", (event) => {
     console.log("upcoming");
-    displayUpcomingTasks();
+    displayTaskToggler("Upcoming");
+    addUpcomingTasksToList();
 })
 categorySidebar.addEventListener("click", (event) => {
     if (event.target.classList.contains("sidebar-item")) {
         const catName = event.target.children[0].innerText;
-        console.log(catName)
-        displayTasksByCategory(catName);
+        console.log(catName);
+        displayTaskToggler(catName);
+        AddTasksByCat(catName);
     }
 })
