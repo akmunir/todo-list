@@ -10,10 +10,8 @@ export const Task = class {
         this.category = category;
         this.complete = false;
         this.dueDate = dueDate
-        console.log(dueDate)
         let dueYear = dueDate.substring(0, 4);
         let dueMonth = dueDate.substring(5, 7);
-        console.log(dueMonth + " due month");
         let dueDay = dueDate.substring(8);
         this.dueDate = new Date(dueYear, dueMonth - 1, dueDay);
         this.formattedDate = format(this.dueDate, "PPP");
@@ -67,7 +65,6 @@ export const createTask = () => {
     if (newTask.isDueToday()) Task.todaysTasksCount++;
     else Task.upcomingTasksCount++;
     Task.taskList.push(newTask);
-    console.log(newTask);
     return newTask;
 }
 
@@ -81,6 +78,13 @@ export const deleteTask = (taskName) => {
             break;
         }
     }
+    console.log(Task.taskList);
     if (task.isDueToday) Task.todaysTasksCount--;
     else Task.upcomingTasksCount--;
+}
+
+export const taskCompleted = () => {
+    this.complete = true;
+    deleteTask(this);
+    taskList.splice(taskList.indexOf(this), 1);
 }

@@ -40,13 +40,15 @@ aside {
 
 .sidebar-button {
     border: none;
-    background-color: #f2eff58f;
+    background-color: #f8f6f9;
+    box-shadow: none;
     color: #DB504A;
     font-weight: 500;
     font-size: 0.9rem;
 }
 
 .sidebar-item {
+    background-color: #f8f6f9;
     display: flex;
     max-width:100%;
 }

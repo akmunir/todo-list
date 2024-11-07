@@ -10,22 +10,21 @@ import "./sidebar.css";
 const newTaskButton = document.querySelector(".new-task");
 const taskList = document.querySelector(".task-list");
 const deleteTaskButton = document.querySelector(".deletion-button");
-const todaysTasksButton = document.querySelector(".today");
-const upcomingTasksButton = document.querySelector(".upcoming");
+const todaysTasksButton = document.querySelector(".sidebar-today");
+const upcomingTasksButton = document.querySelector(".sidebar-upcoming");
 const categorySidebar = document.querySelector(".categories");
+export let activeTab = "Today";
 createCategory();
 displayTaskToggler("Today");
 newTaskButton.addEventListener("click", (event) => {
     if ((deleteTaskButton.classList.contains("hide"))) {
         deleteTaskButton.classList.toggle("hide");
     }
-    console.log(todaysTasksButton)
     displayTaskCreation();
     updateTaskCount();
 
 })
 taskList.addEventListener("click", (event)=> {
-    console.log(Task.taskList);
         for (let task of Task.taskList) {
             if (event.target.classList.contains(task.title)) {
                 editTaskInfo(task);
@@ -41,20 +40,21 @@ deleteTaskButton.addEventListener("click", (event)=> {
 });
 
 todaysTasksButton.addEventListener("click", (event) => {
-    console.log("displayTasks");
+    activeTab = "Today";
     displayTaskToggler("Today");
     addTodaysTasksToList();
 })
 upcomingTasksButton.addEventListener("click", (event) => {
-    console.log("upcoming");
+    activeTab = "Upcoming";
     displayTaskToggler("Upcoming");
     addUpcomingTasksToList();
 })
 categorySidebar.addEventListener("click", (event) => {
     if (event.target.classList.contains("sidebar-item")) {
         const catName = event.target.children[0].innerText;
-        console.log(catName);
+        activeTab = catName;
         displayTaskToggler(catName);
         AddTasksByCat(catName);
     }
 })
+

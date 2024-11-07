@@ -1,4 +1,5 @@
 import {createTask, deleteTask, Task} from "./task.js";
+import { activeTab } from "./index.js";
 
 
 export const displayModal = ()=> {
@@ -30,18 +31,17 @@ export const displayTaskCreation = () => {
         event.preventDefault();
         const task = createTask();
         if (event.target.submit.classList.contains("editing")) {
-            console.log(modal.title.value)
             removeTaskFromList(modal.title.value);
             deleteTask(modal.title.value);
             modal.submitTask.classList.toggle("editing");
         }
         if (task) {
             updateTaskList(task);
-            if (task.isDueToday()) displayTaskToggler("Today");
-            else displayTaskToggler("Upcoming");
         }
+        emptyModal(modal);
         modal.taskModal.close();
         modal.submitTask.value = "Add Task";
+        UpdateCurrentlyActiveTaskList();
     });
 }
 
@@ -54,29 +54,46 @@ export const emptyModal = (modal = displayModal())=> {
 }
 
 
-
-
 export const updateTaskList = (task) => {
     const listElement = document.createElement("li");
     const taskContainer = document.createElement("div");
+    const innerContainer = document.createElement("div");
     const taskDueDate = document.createElement("span");
+    const taskCheckOff = document.createElement("div");
+    innerContainer.classList.add("inner-container")
     taskContainer.classList.add("task-container");
     taskDueDate.classList.add("task-due-date");
+    taskCheckOff.classList.add("check-off");
     taskDueDate.innerText = task.getDueDate();
     listElement.innerText = task.getTitle();
     listElement.classList.add("task");
     listElement.classList.add(task.getTitle().replaceAll(/\s/g, ""));
     taskContainer.setAttribute("data-","isActiveTask");
-    taskContainer.appendChild(listElement);
-    taskContainer.appendChild(taskDueDate);
+    taskContainer.appendChild(taskCheckOff);
+    innerContainer.appendChild(listElement);
+    innerContainer.appendChild(taskDueDate);
+    taskContainer.appendChild(innerContainer)
     return taskContainer;
 }
 
+export const UpdateCurrentlyActiveTaskList = ()=> {
+    console.log(activeTab);
+    displayTaskToggler(activeTab);
+    if (activeTab === "Today") {
+        console.log("adding to today")
+        addTodaysTasksToList();
+    } else if (activeTab === "Upcoming") {
+        console.log("adding to upcoming")
+        addUpcomingTasksToList();
+    } else {
+        console.log("adding to cat")
+        AddTasksByCat(activeTab);
+    }
+}
 
 export const updateTaskCount = () => {
     const numTasks = document.querySelector(".num-tasks");
     if(document.querySelector(".main-text").classList.contains("upcoming")) {
-        console.log("upcoming " + Task.upcomingTasksCount);
         if (Task.upcomingTasksCount <= 0) {
         numTasks.innerText = "No Tasks Today";
          } else if (Task.upcomingTasksCount === 1) {
@@ -85,7 +102,6 @@ export const updateTaskCount = () => {
         numTasks.innerText = `${Task.upcomingTasksCount} tasks`
         }
     } else {
-        console.log("today " + Task.todaysTasksCount);
         if (Task.todaysTasksCount <= 0) {
         numTasks.innerText = "No Tasks Today";
         } else if (Task.todaysTasksCount === 1) {
@@ -119,6 +135,7 @@ export const removeTaskFromList = (taskTitle) => {
             }
         }
     }
+    UpdateCurrentlyActiveTaskList();
 }
 export const displayTaskToggler = (taskSection)=> {
     const mainText = document.querySelector(".main-text");
@@ -134,7 +151,6 @@ export const AddTasksByCat = (catName)=> {
     const mainText = document.querySelector(".main-text");
     const list = document.querySelector(".task-list");
     mainText.classList.toggle(catName);
-    const taskList = document.querySelector(".task-list");
     for(let task of Task.taskList) {
         if(task.category === catName) {
             list.appendChild(updateTaskList(task));
@@ -162,7 +178,6 @@ export const addUpcomingTasksToList = ()=> {
     const list = document.querySelector(".task-list");
     mainText.classList.toggle("upcoming");
     if (mainText.classList.contains("today")) mainText.classList.toggle("today");
-    console.log(Task.taskList)
     const taskList = document.querySelector(".task-list");
     for(let task of Task.taskList) {
         if(!task.isDueToday()) {

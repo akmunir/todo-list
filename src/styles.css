@@ -17,19 +17,18 @@ main {
 }
 
 .task {
-    list-style: circle;
-    border-top: 1px solid #b1dbec;
+    list-style: none;
+    width: 100%;
+    margin-left: 1.5rem;
     font-size: 1rem;
+    padding-top: 0.8rem;
     padding-bottom: 25px;
     padding-left: 0;
     list-style-position: inside;
+
 }
 .task:hover {
     cursor: pointer;
-}
-
-.task::marker {
-    font-size: 3rem;
 }
 .main-text {
     font-size: 2rem;
@@ -53,11 +52,30 @@ main {
     left: 10%;
     font-size: 0.8rem;
 }
-
-.task-container:hover {
-    background-color: #f4ecec;
+.inner-container {
+    border-top: 1px solid #b1dbec;
+    width: 80%;
 }
-
+.inner-container:hover {
+    background-color: #f4ecec;
+    cursor: pointer;
+}
+.task-container {
+    display: flex;
+}
 .hide {
     display: none;
+}
+
+.check-off {
+    margin-top: 10px;
+    border: 1.5px solid black;
+    width: 15px;
+    height:15px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+.check-off:hover {
+    cursor: pointer;
+    background-color: green;
 }
