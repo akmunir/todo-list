@@ -25,12 +25,24 @@ newTaskButton.addEventListener("click", (event) => {
 
 })
 taskList.addEventListener("click", (event)=> {
+    console.log(event.target)
+    if (event.target.classList.contains("check-off"))
+        {
+    
+            const taskContainer = event.target.parentNode;
+            const title = taskContainer.dataset.title;
+            deleteTask(title);
+            removeTaskFromList(title); 
+            updateTaskCount();
+            return;
+        }
         for (let task of Task.taskList) {
             if (event.target.classList.contains(task.title)) {
                 editTaskInfo(task);
             }
         }
         updateTaskCount();
+    
 })
 deleteTaskButton.addEventListener("click", (event)=> {
     const taskTitle = emptyModal();
@@ -57,4 +69,5 @@ categorySidebar.addEventListener("click", (event) => {
         AddTasksByCat(catName);
     }
 })
+
 

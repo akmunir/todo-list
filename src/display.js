@@ -68,7 +68,7 @@ export const updateTaskList = (task) => {
     listElement.innerText = task.getTitle();
     listElement.classList.add("task");
     listElement.classList.add(task.getTitle().replaceAll(/\s/g, ""));
-    taskContainer.setAttribute("data-","isActiveTask");
+    taskContainer.setAttribute("data-title", task.getTitle());
     taskContainer.appendChild(taskCheckOff);
     innerContainer.appendChild(listElement);
     innerContainer.appendChild(taskDueDate);
