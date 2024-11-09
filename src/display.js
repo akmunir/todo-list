@@ -77,31 +77,35 @@ export const updateTaskList = (task) => {
 }
 
 export const UpdateCurrentlyActiveTaskList = ()=> {
-    console.log(activeTab);
     displayTaskToggler(activeTab);
     if (activeTab === "Today") {
-        console.log("adding to today")
         addTodaysTasksToList();
     } else if (activeTab === "Upcoming") {
-        console.log("adding to upcoming")
         addUpcomingTasksToList();
     } else {
-        console.log("adding to cat")
         AddTasksByCat(activeTab);
     }
 }
 
 export const updateTaskCount = () => {
     const numTasks = document.querySelector(".num-tasks");
+    const taskList = document.querySelectorAll(".task-container");
+    const taskCount = taskList.length;
+    if(document.querySelector(".main-text").classList.contains("upcoming"))
+    if(document.querySelector(".main-text").classList.contains("today")) Task.todaysTasksCount = taskCount;
+    else numTasks.innerText = taskCount;
+    
     if(document.querySelector(".main-text").classList.contains("upcoming")) {
+        Task.upcomingTasksCount = taskCount;
         if (Task.upcomingTasksCount <= 0) {
-        numTasks.innerText = "No Tasks Today";
+        numTasks.innerText = "No Tasks Upcoming";
          } else if (Task.upcomingTasksCount === 1) {
          numTasks.innerText = `${Task.upcomingTasksCount} task`
         } else {
         numTasks.innerText = `${Task.upcomingTasksCount} tasks`
         }
-    } else {
+    } else if(document.querySelector(".main-text").classList.contains("today")) {
+        Task.todaysTasksCount = taskCount;
         if (Task.todaysTasksCount <= 0) {
         numTasks.innerText = "No Tasks Today";
         } else if (Task.todaysTasksCount === 1) {
@@ -109,7 +113,16 @@ export const updateTaskCount = () => {
         } else {
         numTasks.innerText = `${Task.todaysTasksCount} tasks`
         }
+    } else {
+        if (taskCount === 0) {
+            numTasks.innerText = "No Tasks";
+        } else if (taskCount === 1) {
+            numTasks.innerText = "1 Task";
+        } else {
+            numTasks.innerText = taskCount + " Tasks";
+        }
     }
+    
     
 }
 
@@ -155,7 +168,8 @@ export const AddTasksByCat = (catName)=> {
         if(task.category === catName) {
             list.appendChild(updateTaskList(task));
         }
-    }    
+    }
+    updateTaskCount();    
 }
 
 export const addTodaysTasksToList = ()=> {
