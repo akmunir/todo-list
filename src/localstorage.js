@@ -8,7 +8,6 @@ export const loadTasksFromLocalStorage = () => {
     if (localStorage.getItem("tasks")) {
         for (let task of JSON.parse(localStorage.getItem("tasks"))) {
             Object.setPrototypeOf(task, Task.prototype)
-            console.log(task);
             Task.taskList.push(task);
         } 
     }

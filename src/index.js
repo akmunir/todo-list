@@ -31,7 +31,6 @@ newTaskButton.addEventListener("click", (event) => {
 
 })
 taskList.addEventListener("click", (event)=> {
-    console.log(event.target)
     if (event.target.classList.contains("check-off"))
         {
     
@@ -42,8 +41,10 @@ taskList.addEventListener("click", (event)=> {
             updateTaskCount();
             return;
         } else {
+            console.log("editing");
             for (let task of Task.taskList) {
                 if (event.target.classList.contains(task.title)) {
+                    console.log(task);
                     editTaskInfo(task);
                 }
              }
