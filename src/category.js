@@ -1,15 +1,14 @@
 import { saveCatagoriesToLocalStorage } from "./localstorage";
-export const createCategory = (inputValue = 0)=> {
+
+export const createCategory = () => {
     const categoryContainer = document.querySelector(".category-container");
-    const categoryContent = document.querySelector(".categories");
     const input = document.createElement("input");
-    input.classList.add("add-category");
-    input.classList.add("hide");
+    input.classList.add("add-category", "hide");
     input.placeholder = "Category";
     const submitCategory = document.createElement("button");
     submitCategory.innerText = "Add";
-    submitCategory.classList.add("submit-category");
-    submitCategory.classList.add("hide");
+    submitCategory.classList.add("submit-category", "hide");
+
     categoryContainer.appendChild(input);
     categoryContainer.appendChild(submitCategory);
 
@@ -17,26 +16,36 @@ export const createCategory = (inputValue = 0)=> {
         if (event.target.classList.contains("category-container") || event.target.classList.contains("new-category")) {
             input.classList.toggle("hide");
             submitCategory.classList.toggle("hide");
-        };
+        }
     });
-    submitCategory.addEventListener("click", (event)=> {           
+
+    submitCategory.addEventListener("click", () => {
         input.classList.toggle("hide");
         submitCategory.classList.toggle("hide");
-        if (!(input.value.trim() === "")) {
- 
-            const item = document.createElement("div");
-            item.classList.add("sidebar-item");
-            const category = document.createElement("button");
-            category.innerText = input.value;
-            category.classList.add("sidebar-button")
-            item.appendChild(category);
-            categoryList.addCategory(input.value);
-            categoryContent.appendChild(item);
+
+        const categoryName = input.value.trim();
+        if (categoryName) {
+            addCategory(categoryName);
+            categoryList.addCategory(categoryName); 
             saveCatagoriesToLocalStorage();
             input.value = "";
         }
-});
-}
+    });
+};
+
+export const addCategory = (categoryName) => {
+    const categoryContent = document.querySelector(".categories");
+    const sidebarItem = document.createElement("div");
+    sidebarItem.classList.add("sidebar-item");
+
+    const category = document.createElement("button");
+    category.classList.add("sidebar-button");
+    category.innerText = categoryName;
+
+    sidebarItem.appendChild(category);
+    categoryContent.appendChild(sidebarItem);
+};
+
 
 
 
