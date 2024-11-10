@@ -1,4 +1,5 @@
-export const createCategory = ()=> {
+import { saveCatagoriesToLocalStorage } from "./localstorage";
+export const createCategory = (inputValue = 0)=> {
     const categoryContainer = document.querySelector(".category-container");
     const categoryContent = document.querySelector(".categories");
     const input = document.createElement("input");
@@ -25,17 +26,19 @@ export const createCategory = ()=> {
  
             const item = document.createElement("div");
             item.classList.add("sidebar-item");
-            const category = document.createElement("buton");
+            const category = document.createElement("button");
             category.innerText = input.value;
             category.classList.add("sidebar-button")
             item.appendChild(category);
             categoryList.addCategory(input.value);
             categoryContent.appendChild(item);
+            saveCatagoriesToLocalStorage();
             input.value = "";
         }
 });
-
 }
+
+
 
 export const categoryList =  {
      categoryCount: [],

@@ -1,4 +1,5 @@
 import { format, toDate, isToday} from "date-fns";
+import { saveTasksToLocalStorage } from "./localstorage";
 export const Task = class {
     static todaysTasksCount = 0;
     static upcomingTasksCount = 0;
@@ -39,6 +40,28 @@ export const Task = class {
     }
 }
 
+Task.prototype.getTitle = function() {
+    return this.title
+}
+Task.prototype.getDueDate = function() {
+    return "due " + this.formattedDate;
+}
+Task.prototype.getDescription = function() {
+    return this.description
+}
+Task.prototype.getPriority = function() {
+    return this.priority
+}
+
+Task.prototype.format = function() {
+    return `${title} ${description} ${this.dueDate} ${this.priority} ${notes}`;
+}
+Task.prototype.formattedDate = function() {
+    this.formattedDate = date;
+}
+Task.prototype.isToday = function() {
+    return isToday(this.dueDate);
+}
 
 
 
@@ -65,6 +88,7 @@ export const createTask = () => {
     if (newTask.isDueToday()) Task.todaysTasksCount++;
     else Task.upcomingTasksCount++;
     Task.taskList.push(newTask);
+    saveTasksToLocalStorage();
     return newTask;
 }
 
@@ -81,6 +105,7 @@ export const deleteTask = (taskName) => {
     console.log(Task.taskList);
     if (task.isDueToday) Task.todaysTasksCount--;
     else Task.upcomingTasksCount--;
+    saveTasksToLocalStorage();
 }
 
 export const taskCompleted = () => {

@@ -1,6 +1,7 @@
 import {Task, createTask, deleteTask} from "./task.js";
-import {displayTaskCreation, editTaskInfo, emptyModal, updateTaskCount, updateTaskList, removeTaskFromList, AddTasksByCat, displayTaskToggler, addUpcomingTasksToList, addTodaysTasksToList} from "./display.js";
+import {displayTaskCreation, editTaskInfo, emptyModal, updateTaskCount, updateTaskList, removeTaskFromList, AddTasksByCat, displayTaskToggler, addUpcomingTasksToList, addTodaysTasksToList, UpdateCurrentlyActiveTaskList} from "./display.js";
 import { createCategory } from "./category.js";
+import {loadTasksFromLocalStorage, loadCategoriesFromLocalStorage} from "./localstorage.js";
 import "./styles.css";
 import "./reset.css";
 import "./modal.css";
@@ -16,6 +17,11 @@ const categorySidebar = document.querySelector(".categories");
 export let activeTab = "Today";
 createCategory();
 displayTaskToggler("Today");
+document.addEventListener("DOMContentLoaded", () => {
+    loadTasksFromLocalStorage();
+    loadCategoriesFromLocalStorage();
+    UpdateCurrentlyActiveTaskList(); 
+});
 newTaskButton.addEventListener("click", (event) => {
     if ((deleteTaskButton.classList.contains("hide"))) {
         deleteTaskButton.classList.toggle("hide");
@@ -35,13 +41,14 @@ taskList.addEventListener("click", (event)=> {
             removeTaskFromList(title); 
             updateTaskCount();
             return;
+        } else {
+            for (let task of Task.taskList) {
+                if (event.target.classList.contains(task.title)) {
+                    editTaskInfo(task);
+                }
+             }
+                updateTaskCount();
         }
-        for (let task of Task.taskList) {
-            if (event.target.classList.contains(task.title)) {
-                editTaskInfo(task);
-            }
-        }
-        updateTaskCount();
     
 })
 deleteTaskButton.addEventListener("click", (event)=> {

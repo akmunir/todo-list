@@ -1,6 +1,6 @@
 .task-modal {
-    min-width:40vw;
-    min-height: 15rem;
+    min-width:35vw;
+    min-height: 16rem;
     border-radius: 10px;
     border: none;
     box-shadow: 0px 0px 15px 0px rgba(49, 49, 48, 0.75);
@@ -83,6 +83,9 @@ input {
 .high {
     color: rgb(153, 6, 6);
 }
+.modal-header {
+    display: flex;
+}
 .modal-button {
     box-shadow: none;
     border: none;
@@ -93,9 +96,10 @@ input {
     cursor: pointer;
 }
 .deletion-button {
+    display:inline-block;
     color: white;
     background-color: red;
     padding: 10px 8px;
     font-size: 0.8rem;
-    margin-left: 10vw;
+    margin-left: auto;
 }

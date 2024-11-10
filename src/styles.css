@@ -64,7 +64,7 @@ main {
     display: flex;
 }
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .check-off {

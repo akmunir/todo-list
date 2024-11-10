@@ -91,14 +91,14 @@ export const updateTaskCount = () => {
     const numTasks = document.querySelector(".num-tasks");
     const taskList = document.querySelectorAll(".task-container");
     const taskCount = taskList.length;
-    if(document.querySelector(".main-text").classList.contains("upcoming"))
+    if(document.querySelector(".main-text").classList.contains("upcoming")) 
     if(document.querySelector(".main-text").classList.contains("today")) Task.todaysTasksCount = taskCount;
     else numTasks.innerText = taskCount;
     
     if(document.querySelector(".main-text").classList.contains("upcoming")) {
         Task.upcomingTasksCount = taskCount;
         if (Task.upcomingTasksCount <= 0) {
-        numTasks.innerText = "No Tasks Upcoming";
+        numTasks.innerText = "No Tasks";
          } else if (Task.upcomingTasksCount === 1) {
          numTasks.innerText = `${Task.upcomingTasksCount} task`
         } else {
@@ -107,7 +107,7 @@ export const updateTaskCount = () => {
     } else if(document.querySelector(".main-text").classList.contains("today")) {
         Task.todaysTasksCount = taskCount;
         if (Task.todaysTasksCount <= 0) {
-        numTasks.innerText = "No Tasks Today";
+        numTasks.innerText = "No Tasks";
         } else if (Task.todaysTasksCount === 1) {
         numTasks.innerText = `${Task.todaysTasksCount} task`
         } else {
@@ -119,7 +119,7 @@ export const updateTaskCount = () => {
         } else if (taskCount === 1) {
             numTasks.innerText = "1 Task";
         } else {
-            numTasks.innerText = taskCount + " Tasks";
+            numTasks.innerText = taskCount + " tasks";
         }
     }
     
