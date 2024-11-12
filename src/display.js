@@ -1,10 +1,12 @@
 import {createTask, deleteTask, Task} from "./task.js";
 import { activeTab } from "./index.js";
+import { saveTasksToLocalStorage } from "./localstorage";
 
 
 export const displayModal = ()=> {
     const taskModal = document.querySelector(".task-modal");
-    const prioritySelection = document.querySelector(".dropbtn");
+
+    const prioritySelection = document.querySelector(".priority");
     const form = document.querySelector('form');
     const cancelbtn = document.querySelector(".cancel")
     const title = document.querySelector("#title");
@@ -13,20 +15,19 @@ export const displayModal = ()=> {
     const deletionButton = document.querySelector(".modal-button");
     const categorySelection = document.querySelector(".cat");
     const submitTask = document.querySelector(".submit-task"); 
-    taskModal.showModal();
     return {taskModal, prioritySelection, form, cancelbtn, title, description, date, deletionButton, categorySelection, submitTask};
 }
 export const displayTaskCreation = () => {
+    console.log("aaaa");
+    const taskModal = displayModal();
+    taskModal.deletionButton.classList.toggle("hide");
+    taskModal.taskModal.showModal();
+    
+}
+
+export const setupSubmitListener = () => {
     const modal = displayModal();
     modal.deletionButton.classList.toggle("hide");
-    modal.cancelbtn.addEventListener("click", (event) => {
-        if (event.target.classList.contains("cancel")) {
-            emptyModal(modal);
-            if (!(modal.deletionButton.classList.contains("hide"))) {
-                modal.deletionButton.classList.toggle("hide");
-            }
-        }
-    })
     modal.form.addEventListener("submit", (event) => {
         event.preventDefault();
         const task = createTask();
@@ -44,6 +45,17 @@ export const displayTaskCreation = () => {
         UpdateCurrentlyActiveTaskList();
     });
 }
+export const setupCancelListener = () => {
+    const modal = displayModal();
+    modal.cancelbtn.addEventListener("click", (event) => {
+        if (event.target.classList.contains("cancel")) {
+            emptyModal(modal);
+            if (!modal.deletionButton.classList.contains("hide")) {
+                modal.deletionButton.classList.toggle("hide");
+            }
+        }
+    });
+};
 
 
 export const emptyModal = (modal = displayModal())=> {
@@ -55,6 +67,7 @@ export const emptyModal = (modal = displayModal())=> {
 
 
 export const updateTaskList = (task) => {
+    console.log(task)
     const listElement = document.createElement("li");
     const taskContainer = document.createElement("div");
     const innerContainer = document.createElement("div");
@@ -67,6 +80,7 @@ export const updateTaskList = (task) => {
     taskDueDate.innerText = task.getDueDate();
     listElement.innerText = task.getTitle();
     listElement.classList.add("task");
+    console.log(task.getTitle() + "....")
     listElement.classList.add(task.getTitle().replaceAll(/\s/g, ""));
     taskContainer.setAttribute("data-title", task.getTitle());
     taskContainer.appendChild(taskCheckOff);
@@ -129,12 +143,31 @@ export const updateTaskCount = () => {
 
 export const editTaskInfo = (task) => {
     const taskModal = displayModal();
+    taskModal.taskModal.showModal();
     taskModal.submitTask.classList.toggle("editing");
     taskModal.deletionButton.classList.toggle("hide");
     taskModal.title.value = task.title;
     taskModal.description.value = task.description;
-    taskModal.date.value = task.formattedDate;
+    taskModal.prioritySelection.value = task.priority;
+    taskModal.categorySelection.value = task.category;
+    taskModal.date.value = typeof task.dueDate === 'string' ? task.dueDate.substring(0, 10) : new Date(task.dueDate).toISOString().substring(0, 10);
     taskModal.submitTask.value = "Edit Task";
+    taskModal.form.onsubmit = (event) => {
+        event.preventDefault();
+        if (taskModal.submitTask.classList.contains("editing")) {
+            task.title = taskModal.title.value;
+            task.description = taskModal.description.value;
+            task.dueDate = taskModal.date.value;
+            task.priority = taskModal.prioritySelection.value;
+            task.category = taskModal.categorySelection.value;
+            updateTaskList(task);
+            saveTasksToLocalStorage();
+            UpdateCurrentlyActiveTaskList();
+            taskModal.submitTask.classList.remove("editing");
+            taskModal.submitTask.value = "Add Task";
+            emptyModal(taskModal);
+        }
+    };
 }
 
 

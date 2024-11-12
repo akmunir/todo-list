@@ -10,7 +10,7 @@ export const Task = class {
         this.priority = priority;
         this.category = category;
         this.complete = false;
-        this.dueDate = dueDate
+        this.dueDate = dueDate.value;
         let dueYear = dueDate.substring(0, 4);
         let dueMonth = dueDate.substring(5, 7);
         let dueDay = dueDate.substring(8);
@@ -70,23 +70,26 @@ export const createTask = () => {
     const descriptionInput = document.querySelector('form input[name="description"]');
     const dueDateInput = document.querySelector('form input[name="dueDate"]');
     const priorityInput = document.querySelector(".priority");
-    const categoryInput = document.querySelector(".cat")
-    const taskInfo = [
-        titleInput.value.trim(),
-        descriptionInput.value.trim(),
-        dueDateInput.value,
-        priorityInput.value,
-        categoryInput.value,
-    ];
-    if (!taskInfo[0]) {
-        return null;
+    const categoryInput = document.querySelector(".cat");
+    const isEditing = document.querySelector(".submit-task").classList.contains("editing");
+    const taskTitle = titleInput.value.trim();
+
+    if (!taskTitle) return null; 
+
+    if (isEditing) {
+        console.log("entered isEditing")
+        const task = Task.taskList.find((t) => t.title === taskTitle);
+        if (task) {
+            console.log(task + "task")
+            task.title = titleInput.value;
+            task.description = descriptionInput.value.trim();
+            task.dueDate = dueDateInput.value;
+            task.priority = priorityInput.value;
+            task.category = categoryInput.value;
+            saveTasksToLocalStorage();
+        }
     }
-    titleInput.value = "";
-    descriptionInput.value = "";
-    dueDateInput.classList.remove("selected");
-    const newTask = new Task(...taskInfo)
-    if (newTask.isDueToday()) Task.todaysTasksCount++;
-    else Task.upcomingTasksCount++;
+    const newTask = new Task(taskTitle, descriptionInput.value.trim(), dueDateInput.value, priorityInput.value, categoryInput.value);
     Task.taskList.push(newTask);
     saveTasksToLocalStorage();
     return newTask;
@@ -102,7 +105,6 @@ export const deleteTask = (taskName) => {
             break;
         }
     }
-    console.log(Task.taskList);
     if (task.isDueToday) Task.todaysTasksCount--;
     else Task.upcomingTasksCount--;
     saveTasksToLocalStorage();

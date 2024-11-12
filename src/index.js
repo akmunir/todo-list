@@ -1,5 +1,5 @@
 import {Task, createTask, deleteTask} from "./task.js";
-import {displayTaskCreation, editTaskInfo, emptyModal, updateTaskCount, updateTaskList, removeTaskFromList, AddTasksByCat, displayTaskToggler, addUpcomingTasksToList, addTodaysTasksToList, UpdateCurrentlyActiveTaskList} from "./display.js";
+import {displayTaskCreation, editTaskInfo, emptyModal, updateTaskCount, updateTaskList, removeTaskFromList, AddTasksByCat, displayTaskToggler, addUpcomingTasksToList, addTodaysTasksToList, UpdateCurrentlyActiveTaskList, setupCancelListener , setupSubmitListener} from "./display.js";
 import { createCategory } from "./category.js";
 import {loadTasksFromLocalStorage, loadCategoriesFromLocalStorage} from "./localstorage.js";
 import "./styles.css";
@@ -18,6 +18,8 @@ export let activeTab = "Today";
 createCategory();
 displayTaskToggler("Today");
 document.addEventListener("DOMContentLoaded", () => {
+    setupCancelListener();
+    setupSubmitListener();
     loadTasksFromLocalStorage();
     loadCategoriesFromLocalStorage();
     UpdateCurrentlyActiveTaskList(); 
@@ -41,10 +43,8 @@ taskList.addEventListener("click", (event)=> {
             updateTaskCount();
             return;
         } else {
-            console.log("editing");
             for (let task of Task.taskList) {
                 if (event.target.classList.contains(task.title)) {
-                    console.log(task);
                     editTaskInfo(task);
                 }
              }
