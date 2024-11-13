@@ -20,8 +20,10 @@ export const saveCatagoriesToLocalStorage = () => {
 export const loadCategoriesFromLocalStorage = () => {
     const categories = JSON.parse(localStorage.getItem("categories"));
     if (categories) {
+        console.log(categories)
         for (let cat of categories) {
             addCategory(cat);
+            categoryList.addCategory(cat)
         } 
     }
 };

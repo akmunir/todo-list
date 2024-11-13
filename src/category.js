@@ -25,6 +25,7 @@ export const createCategory = () => {
 
         const categoryName = input.value.trim();
         if (categoryName) {
+            console.log("created?")
             addCategory(categoryName);
             categoryList.addCategory(categoryName); 
             saveCatagoriesToLocalStorage();
@@ -37,11 +38,9 @@ export const addCategory = (categoryName) => {
     const categoryContent = document.querySelector(".categories");
     const sidebarItem = document.createElement("div");
     sidebarItem.classList.add("sidebar-item");
-
     const category = document.createElement("button");
     category.classList.add("sidebar-button");
     category.innerText = categoryName;
-
     sidebarItem.appendChild(category);
     categoryContent.appendChild(sidebarItem);
 };
@@ -53,10 +52,15 @@ export const categoryList =  {
      categoryCount: [],
      addCategory: (category) => {
         categoryList.categoryCount.push(category);
-        const dropdown = document.querySelector(".dropbtn");
+        addCategoryToDropDown(category);
+    },
+}
+
+ const addCategoryToDropDown = (category) => {
+    console.log("added to drpwn")
+    const dropdown = document.querySelector(".dropbtn");
         const newCat = document.createElement("option");
         newCat.value = category;
         newCat.innerText = category;
         dropdown.appendChild(newCat);
-    },
 }

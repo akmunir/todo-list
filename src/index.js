@@ -1,6 +1,6 @@
 import {Task, createTask, deleteTask} from "./task.js";
 import {displayTaskCreation, editTaskInfo, emptyModal, updateTaskCount, updateTaskList, removeTaskFromList, AddTasksByCat, displayTaskToggler, addUpcomingTasksToList, addTodaysTasksToList, UpdateCurrentlyActiveTaskList, setupCancelListener , setupSubmitListener} from "./display.js";
-import { createCategory } from "./category.js";
+import { categoryList, createCategory } from "./category.js";
 import {loadTasksFromLocalStorage, loadCategoriesFromLocalStorage} from "./localstorage.js";
 import "./styles.css";
 import "./reset.css";
@@ -33,9 +33,10 @@ newTaskButton.addEventListener("click", (event) => {
 
 })
 taskList.addEventListener("click", (event)=> {
+    console.log("eneter tasklist listener")
+    console.log(categoryList)
     if (event.target.classList.contains("check-off"))
         {
-    
             const taskContainer = event.target.parentNode;
             const title = taskContainer.dataset.title;
             deleteTask(title);
@@ -44,15 +45,15 @@ taskList.addEventListener("click", (event)=> {
             return;
         } else {
             for (let task of Task.taskList) {
-                if (event.target.classList.contains(task.title)) {
-                    console.log(task)
+                console.log(task)
+                if (event.target.classList.contains(task.title.replace(/\s/g, ''))) {
                     editTaskInfo(task);
                 }
              }
                 updateTaskCount();
         }
     
-})
+});
 deleteTaskButton.addEventListener("click", (event)=> {
     const taskTitle = emptyModal();
     deleteTask(taskTitle);

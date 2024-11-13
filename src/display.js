@@ -20,6 +20,7 @@ export const displayTaskCreation = () => {
     const taskModal = displayModal();
     taskModal.deletionButton.classList.toggle("hide");
     taskModal.taskModal.showModal();
+    console.log("entered task creation")
     
 }
 
@@ -37,6 +38,7 @@ export const setupSubmitListener = () => {
             modal.submitTask.classList.toggle("editing");
         }
         if (task) {
+            console.log("entering submit from task");
             console.log("task being updated to list")
             updateTaskList(task);
         }
@@ -44,6 +46,7 @@ export const setupSubmitListener = () => {
         modal.taskModal.close();
         modal.submitTask.value = "Add Task";
         UpdateCurrentlyActiveTaskList();
+        saveTasksToLocalStorage();
     });
 }
 export const setupCancelListener = () => {
@@ -141,6 +144,7 @@ export const updateTaskCount = () => {
 
 
 export const editTaskInfo = (task) => {
+    console.log("Aaaaa")
     const taskModal = displayModal();
     taskModal.taskModal.showModal();
     taskModal.submitTask.classList.toggle("editing");
