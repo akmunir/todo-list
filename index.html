@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Foldit:wght@100..900&family=Lilita+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+        <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAj5mvAD9DTABXancAEBEUAKPO7ABARU4AkJuxAIWy0gCTweoAZHuKAISlvQAQERMAVFpnABMVGAD///8AdZWmAAUGBgCZsssAOT5GAIWasABUXGgADxATAG9+kAAXGRwAMTU8AIKLnwB7o8UAAwMEAKDE4gABAQEAT1VhAJSguABjboAAY4OfAJ6pwQBDSFIAnsj0AJnC3gBaYm8AmsfoAISPowCo0+sAhY+jABESFAA9QUsAksvzAJWgtwCMlasAgaG6ALDd+AB9hpkAl6K5AIuVqgBuk6wAlr/pAImeuQBTZXQAGx4jAHODlwCdzfUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAAAfBgAAAAAAAAAAAAAAAAAAEQE1JB4AAAAAAAAAAAAAAA0aBCw5IDgAAAAAAAAAAAAAIww2JiopOzoAAAAAAAAAAAAvGwkuMgoXAAAAAAAADwAAADEoPCUFAxgAAAAAAAAAAAAhEh03CBAWJwAAAAAAAAAAABUUCyIcBActAAAAAAAAAAAAAAACNCswMwAAAAAAAAAAAAAAAAAOExkAAAAAAAAAAAAAAAAAAAAAAA8PAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" rel="icon" type="image/x-icon">
+    <title>To-Do List</title>
+<script defer src="main.js"></script></head>
+
+
+<body>
+    <div class="parent">
+        <aside class="sidebar">
+            <div class="button-container">
+                <button class="new-task"></button>
+                <span class="button-text">New Task</span>
+            </div>
+            <div class="sidebar-item sidebar-today">
+                <button class="sidebar-button today">Today</button>
+            </div>
+            <div class="sidebar-item sidebar-upcoming">
+                <button class="sidebar-button upcoming">Upcoming</button>
+            </div>
+            <div class="button-container category-container">
+                <button class="new-category"></button>
+                <span class="button-text">Category</span>
+            </div>
+            <div class="categories">
+                
+            </div>
+        </aside>
+    <main>
+            <h1 class="main-text">Today <br> 
+                <span class="num-tasks">No Tasks</span></h1>
+        <ul class="task-list">
+        </ul>
+    </main>
+    </div>
+    <div>
+        <dialog class="task-modal">
+           
+            <form id="task-form" action="www.google.com" autocomplete="off">
+                <div class="modal-header">
+                    <input id="title" type="text" name="title" placeholder="Task Name" required>
+                    <button class="modal-button deletion-button">Delete Task</button>
+                </div>
+                <input id="description"="text" name="description" placeholder="Task Description">
+                <input id="date" type="date" name="dueDate" placeholder="Due Today" required>
+                <div class="dropdown-container">
+                    <select class="dropbtn cat">
+                    <option value="">Category</option>
+                    </select>
+                    <select class="dropbtn priority">
+                    <option value="">Priority</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    </select>
+                    <div class="task-creation-buttons">
+                    <button type="button" class="cancel modal-button">Cancel</button>
+                    <input class="submit-task" id="submit" type="submit" value="Add Task">
+                    </div>
+                </div>
+            </form>
+        </dialog>
+    </div>
+</body>
+</html>
