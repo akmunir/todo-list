@@ -77,10 +77,8 @@ export const createTask = () => {
     if (!taskTitle) return null; 
 
     if (isEditing) {
-        console.log("entered isEditing")
         const task = Task.taskList.find((t) => t.title === taskTitle);
         if (task) {
-            console.log(task + "task")
             task.title = titleInput.value;
             task.description = descriptionInput.value.trim();
             task.dueDate = dueDateInput.value;

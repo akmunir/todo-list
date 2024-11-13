@@ -5,7 +5,6 @@ import { saveTasksToLocalStorage } from "./localstorage";
 
 export const displayModal = ()=> {
     const taskModal = document.querySelector(".task-modal");
-
     const prioritySelection = document.querySelector(".priority");
     const form = document.querySelector('form');
     const cancelbtn = document.querySelector(".cancel")
@@ -18,7 +17,6 @@ export const displayModal = ()=> {
     return {taskModal, prioritySelection, form, cancelbtn, title, description, date, deletionButton, categorySelection, submitTask};
 }
 export const displayTaskCreation = () => {
-    console.log("aaaa");
     const taskModal = displayModal();
     taskModal.deletionButton.classList.toggle("hide");
     taskModal.taskModal.showModal();
@@ -29,14 +27,17 @@ export const setupSubmitListener = () => {
     const modal = displayModal();
     modal.deletionButton.classList.toggle("hide");
     modal.form.addEventListener("submit", (event) => {
+        console.log("submitting")
         event.preventDefault();
         const task = createTask();
         if (event.target.submit.classList.contains("editing")) {
+            console.log("submitting from editing")
             removeTaskFromList(modal.title.value);
             deleteTask(modal.title.value);
             modal.submitTask.classList.toggle("editing");
         }
         if (task) {
+            console.log("task being updated to list")
             updateTaskList(task);
         }
         emptyModal(modal);
@@ -67,7 +68,6 @@ export const emptyModal = (modal = displayModal())=> {
 
 
 export const updateTaskList = (task) => {
-    console.log(task)
     const listElement = document.createElement("li");
     const taskContainer = document.createElement("div");
     const innerContainer = document.createElement("div");
@@ -80,7 +80,6 @@ export const updateTaskList = (task) => {
     taskDueDate.innerText = task.getDueDate();
     listElement.innerText = task.getTitle();
     listElement.classList.add("task");
-    console.log(task.getTitle() + "....")
     listElement.classList.add(task.getTitle().replaceAll(/\s/g, ""));
     taskContainer.setAttribute("data-title", task.getTitle());
     taskContainer.appendChild(taskCheckOff);
