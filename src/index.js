@@ -35,14 +35,22 @@ newTaskButton.addEventListener("click", (event) => {
 taskList.addEventListener("click", (event)=> {
     console.log("eneter tasklist listener")
     console.log(categoryList)
-    if (event.target.classList.contains("check-off"))
-        {
-            const taskContainer = event.target.parentNode;
-            const title = taskContainer.dataset.title;
+    if (event.target.classList.contains("check-off")) {
+        const taskContainer = event.target.parentNode;
+        const title = taskContainer.dataset.title;
+        const innerContainer = taskContainer.querySelector(".inner-container");
+        const taskElement = innerContainer.querySelector(".task");
+        event.target.classList.add("checked");
+        const strikethroughLine = document.createElement("div");
+        strikethroughLine.classList.add("strikethrough-line");
+        innerContainer.appendChild(strikethroughLine);
+        setTimeout(() => {
             deleteTask(title);
-            removeTaskFromList(title); 
+            removeTaskFromList(title);
             updateTaskCount();
-            return;
+        }, 300); 
+        
+        return;
         } else {
             for (let task of Task.taskList) {
                 console.log(task)
